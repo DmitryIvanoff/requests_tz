@@ -3,17 +3,26 @@ version: "3.3"
 services:
   postgres:
     image: postgres:14
-    env_file: env.example
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    env_file: config/local/env.example
     ports:
       - "5432"
 
   django:
-    build: .
+    build:
+      context: .
+      dockerfile: config/local/Dockerfile
+    volumes:
+      - ./src:/usr/src/app
     depends_on:
       - postgres
     links:
       - postgres
     ports:
       - "8888:8888"
-    env_file: env.example
+    env_file: config/local/env.example
     command: --debug
+
+volumes:
+  postgres_data:

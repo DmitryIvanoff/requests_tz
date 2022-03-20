@@ -3,7 +3,7 @@ import asyncio
 import databases
 from tenacity import after_log, before_log, retry, stop_after_attempt, wait_fixed
 
-from settings import DATABASE_URL
+from app.settings import DATABASE_URL
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)

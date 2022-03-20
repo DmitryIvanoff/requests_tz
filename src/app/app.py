@@ -1,3 +1,5 @@
+import os
+import databases
 import tornado.web
 import tornado.ioloop
 import tornado.locks
@@ -5,14 +7,10 @@ import tornado.netutil
 import tornado.process
 from tornado.options import options
 from tornado.web import url
-
 from concurrent.futures import ProcessPoolExecutor
 
-import os
-import settings
-import databases
-
-from handlers import (RequestsReadUpdateDeleteHandler, RequestsCreateHandler)
+from app import settings
+from app.handlers import (RequestsReadUpdateDeleteHandler, RequestsCreateHandler)
 
 
 class App(tornado.web.Application):
@@ -44,13 +42,4 @@ async def main():
 
         await shutdown_event.wait()
 
-
-if __name__ == "__main__":
-    loop = tornado.ioloop.IOLoop.current()
-    executor = ProcessPoolExecutor()
-    loop.set_default_executor(executor)
-    try:
-        loop.run_sync(main)
-    finally:
-        executor.shutdown(wait=True)
 

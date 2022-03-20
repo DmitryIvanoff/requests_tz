@@ -23,4 +23,4 @@ todo
  - tests
  - nginx config + tornado multiprocesses
  - linters
-
+ - poetry
