@@ -7,7 +7,6 @@ import tornado.netutil
 import tornado.process
 from tornado.options import options
 from tornado.web import url
-from concurrent.futures import ProcessPoolExecutor
 
 from app import settings
 from app.handlers import (RequestsReadUpdateDeleteHandler, RequestsCreateHandler)

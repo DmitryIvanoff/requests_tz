@@ -23,7 +23,7 @@ def generate_key(body: dict) -> str:
             for kv in element.items():
                 stack.extend(kv)
         else:
-            keys_stack.append(str(element))
+            keys_stack.append(base64.b64encode(str(element).encode()).decode())
     return base64.b64encode("".join(reversed(keys_stack)).encode()).decode()
 
 
@@ -52,18 +52,15 @@ class RequestsReadUpdateDeleteHandler(BaseHandler):
         else:
             raise tornado.web.HTTPError(404)
 
-    def put(self, entity):
-        self.write(entity)
-
-    def patch(self, entity):
-        self.write(entity)
-
     async def delete(self, entity):
         db: databases.Database = self.application.db
         query = delete(Request).where(Request.key == entity)
         result = await db.execute(query)
-        logger.debug(f'query: {query}\nresult: {result}')
-        self.set_status(204)
+        logger.info(f'query: {query}\nresult: {result}')
+        if result:
+            self.set_status(204)
+        else:
+            raise tornado.web.HTTPError(404)
 
 
 class RequestsCreateHandler(BaseHandler):

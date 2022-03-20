@@ -1,12 +1,12 @@
 from sqlalchemy.orm import declarative_base
-from sqlalchemy import Column, String, JSON, Index, Integer
+from sqlalchemy import Column, JSON, Integer, Text
 Base = declarative_base()
 
 
 class Request(Base):
     __tablename__ = 'requests'
 
-    key = Column(String, primary_key=True, index=True)
+    key = Column(Text, primary_key=True, index=True)
     body = Column(JSON, nullable=True)
     amount = Column(Integer, default=1)
 
