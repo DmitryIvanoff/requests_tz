@@ -23,7 +23,7 @@ def generate_key(body: dict) -> str:
             for kv in element.items():
                 stack.extend(kv)
         else:
-            keys_stack.append(base64.b64encode(str(element).encode()).decode())
+            keys_stack.append(str(element))
     return base64.b64encode("".join(reversed(keys_stack)).encode()).decode()
 
 
