@@ -9,16 +9,18 @@
 
 ### Stack
 
-- Tornado
-- Databases
-- SQLAlchemy
-- Alembic
+- [Tornado]
+- [Databases]
+- [SQLAlchemy]
+- [Alembic]
 - docker, docker-compose
 
 ### Deploy
 *local*
 - запустить приложение и БД в докере:
-`docker-compose up -d`
+```shell
+$ docker-compose up -d
+```
 
 *dev*
 
@@ -29,3 +31,12 @@ todo
  - nginx config + tornado multiprocesses
  - linters
  - poetry
+
+[Alembic]: https://alembic.sqlalchemy.org/en/latest/
+[psycopg2]: https://www.psycopg.org/
+[Databases]: https://github.com/encode/databases
+[asyncpg]: https://github.com/MagicStack/asyncpg
+[aiopg]: https://github.com/aio-libs/aiopg
+[aiosqlite]: https://github.com/omnilib/aiosqlite
+[Tornado]: https://github.com/tornadoweb/tornado
+[SQLAlchemy]: https://docs.sqlalchemy.org/en/latest/core/
