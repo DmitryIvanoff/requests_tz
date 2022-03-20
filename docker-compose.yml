@@ -1,0 +1,19 @@
+version: "3.3"
+
+services:
+  postgres:
+    image: postgres:14
+    env_file: env.example
+    ports:
+      - "5432"
+
+  django:
+    build: .
+    depends_on:
+      - postgres
+    links:
+      - postgres
+    ports:
+      - "8888:8888"
+    env_file: env.example
+    command: --debug

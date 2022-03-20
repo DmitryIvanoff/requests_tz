@@ -1,0 +1,12 @@
+tornado==6.1
+
+# db
+databases
+asyncpg
+sqlalchemy
+alembic
+psycopg2
+
+# retry
+tenacity
+
