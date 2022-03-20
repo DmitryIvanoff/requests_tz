@@ -57,10 +57,8 @@ class RequestsReadUpdateDeleteHandler(BaseHandler):
         query = delete(Request).where(Request.key == entity)
         result = await db.execute(query)
         logger.info(f'query: {query}\nresult: {result}')
-        if result:
-            self.set_status(204)
-        else:
-            raise tornado.web.HTTPError(404)
+        self.set_status(204, "No content")
+
 
 
 class RequestsCreateHandler(BaseHandler):
@@ -76,7 +74,7 @@ class RequestsCreateHandler(BaseHandler):
         logger.debug(self.request.body)
         body = self.json_args
         if not body:
-            self.set_status(200)
+            self.set_status(200, 'Ok')
             self.write({})
             return
 
@@ -91,12 +89,12 @@ class RequestsCreateHandler(BaseHandler):
                 query = insert(Request).values(key=key, body=body, amount=1)
                 result = await db.execute(query)
                 logger.debug(f'query: {query}\nresult: {result}')
-                self.set_status(201)
+                self.set_status(201, 'Created')
             else:
                 query = update(Request).where(Request.key == key).values(amount=Request.amount + 1)
                 result = await db.execute(query)
                 logger.debug(f'query: {query}\nresult: {result}')
-                self.set_status(200)
+                self.set_status(200, 'Ok')
 
         entity = await self.fetch_entity(key)
         self.write(json.dumps(entity))

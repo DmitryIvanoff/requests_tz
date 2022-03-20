@@ -31,6 +31,7 @@ todo
  - nginx config + tornado multiprocesses
  - linters
  - poetry
+ - load testing (script)
 
 [Alembic]: https://alembic.sqlalchemy.org/en/latest/
 [psycopg2]: https://www.psycopg.org/
