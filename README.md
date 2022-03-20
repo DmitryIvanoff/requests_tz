@@ -16,13 +16,13 @@
 - docker, docker-compose
 
 ### Deploy
-*local*
+**local**
 - запустить приложение и БД в докере:
 ```shell
 $ docker-compose up -d
 ```
 
-*dev*
+**dev**
 
 todo
 
