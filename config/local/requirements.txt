@@ -10,3 +10,8 @@ psycopg2
 # retry
 tenacity
 
+# (de)serialization/validation
+marshmallow
+
+# styling/formatter
+black
