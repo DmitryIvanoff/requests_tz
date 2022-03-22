@@ -42,7 +42,12 @@ class BaseHandler(tornado.web.RequestHandler):
 
 
 class RequestsReadUpdateDeleteHandler(BaseHandler):
-    async def get(self, key):
+    async def get(self, key: str):
+        """
+        get Request object
+        :param key:
+        :return:
+        """
         result = await self.fetch_entity(key)
         if result:
             self.write(result)
@@ -50,10 +55,15 @@ class RequestsReadUpdateDeleteHandler(BaseHandler):
         else:
             raise tornado.web.HTTPError(404)
 
-    async def delete(self, entity):
+    async def delete(self, key: str):
+        """
+        delete Request object
+        :param key:
+        :return:
+        """
         db: databases.Database = self.application.db
         model = self.get_model()
-        query = delete(model).where(model.key == entity)
+        query = delete(model).where(model.key == key)
         result = await db.execute(query)
         logger.debug(f"query: {query}\nresult: {result}")
         self.set_status(204, "No content")
@@ -61,6 +71,10 @@ class RequestsReadUpdateDeleteHandler(BaseHandler):
 
 class RequestsCreateListHandler(BaseHandler):
     async def get(self):
+        """
+        list all Request objs
+        :return:
+        """
         db: databases.Database = self.application.db
         model = self.get_model()
         schema = self.get_schema()
@@ -70,6 +84,10 @@ class RequestsCreateListHandler(BaseHandler):
         await self.finish(schema().dumps(result, many=True) if result else None)
 
     async def post(self):
+        """
+        create new Request object
+        :return:
+        """
         db: databases.Database = self.application.db
         schema = self.get_schema()
         model = self.get_model()
