@@ -29,6 +29,7 @@ todo
 
 ### TODO
  - tests
+ - docs (Swagger)
  - nginx config + tornado multiprocesses
  - linters, formatters
  - poetry
