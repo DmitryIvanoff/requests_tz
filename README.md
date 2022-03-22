@@ -13,6 +13,7 @@
 - [Databases]
 - [SQLAlchemy]
 - [Alembic]
+- [Marshmallow]
 - docker, docker-compose
 
 ### Deploy
@@ -29,7 +30,7 @@ todo
 ### TODO
  - tests
  - nginx config + tornado multiprocesses
- - linters
+ - linters, formatters
  - poetry
  - load testing (script)
 
@@ -41,3 +42,4 @@ todo
 [aiosqlite]: https://github.com/omnilib/aiosqlite
 [Tornado]: https://github.com/tornadoweb/tornado
 [SQLAlchemy]: https://docs.sqlalchemy.org/en/latest/core/
+[Marshmallow]: https://github.com/marshmallow-code/marshmallow
