@@ -1,10 +1,9 @@
 import base64
 import logging
-from functools import partial
-from marshmallow import Schema, fields, post_load, validate
-from app.models import Request
 
-import tornado.ioloop
+from marshmallow import Schema, fields, post_load
+
+from app.models import Request
 
 logger = logging.getLogger("app")
 
@@ -17,7 +16,7 @@ class RequestSchema(Schema):
     @staticmethod
     def generate_key(body: dict) -> str:
         stack = [body]
-        keys_stack = []
+        keys_stack: list[str] = []
         while stack:
             element = stack.pop()
             if isinstance(element, list):

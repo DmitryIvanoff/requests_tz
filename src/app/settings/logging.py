@@ -1,5 +1,6 @@
 import logging.config
-from tornado.options import options, define
+
+from tornado.options import define, options
 
 define("loglevel", default="INFO", help="logging level")
 

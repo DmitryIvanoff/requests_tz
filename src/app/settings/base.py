@@ -1,5 +1,6 @@
 import os
-from tornado.options import define, parse_command_line
+
+from tornado.options import define
 
 define("port", default=8888, help="run on the given port", type=int)
 define(
@@ -8,6 +9,7 @@ define(
     help="run in debug mode",
     type=bool,
 )
+
 
 define("local", default=bool(os.environ.get("LOCAL", False)), help="local deploy")
 

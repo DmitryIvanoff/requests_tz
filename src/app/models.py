@@ -1,5 +1,5 @@
+from sqlalchemy import JSON, Column, Integer, Text
 from sqlalchemy.orm import declarative_base
-from sqlalchemy import Column, JSON, Integer, Text
 
 Base = declarative_base()
 

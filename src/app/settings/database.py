@@ -1,5 +1,6 @@
 import os
-from tornado.options import options, define
+
+from tornado.options import define, options
 
 define("db_host", default=os.environ.get("DB_HOST", "127.0.0.1"), help="db host")
 define("db_port", default=os.environ.get("DB_PORT", "5432"), help="db port")
@@ -15,6 +16,3 @@ DATABASE_URL = (
 )
 
 DATABASE_URL_LOCAL = "sqlite:///./test.db"
-
-if options.local:
-    DATABASE_URL = DATABASE_URL_LOCAL

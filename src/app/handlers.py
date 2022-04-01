@@ -1,16 +1,16 @@
-import tornado.web
-import tornado.ioloop
-import databases
 import json
 import logging
-from typing import Union
 from functools import partial
-from sqlalchemy import insert, select, update, delete
+from typing import Union
+
+import databases
+import tornado.ioloop
+import tornado.web
 from marshmallow.exceptions import ValidationError
+from sqlalchemy import delete, insert, select, update
 
 from app.models import Request
 from app.schemas import RequestSchema
-
 
 logger = logging.getLogger("app")
 

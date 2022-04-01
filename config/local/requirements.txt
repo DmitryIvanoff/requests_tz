@@ -15,3 +15,13 @@ marshmallow
 
 # styling/formatter
 black
+autoflake
+isort
+mypy
+sqlalchemy-stubs
+
+# test
+pytest
+
+# dev
+pytest-cov

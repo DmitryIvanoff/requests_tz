@@ -1,16 +1,16 @@
 import os
+
 import databases
-import tornado.web
 import tornado.ioloop
 import tornado.locks
 import tornado.netutil
 import tornado.process
+import tornado.web
 from tornado.options import options
-from tornado.web import url
 from tornado.routing import HostMatches
 
 from app import settings
-from app.handlers import RequestsReadUpdateDeleteHandler, RequestsCreateListHandler
+from app.handlers import RequestsCreateListHandler, RequestsReadUpdateDeleteHandler
 
 
 class App(tornado.web.Application):
