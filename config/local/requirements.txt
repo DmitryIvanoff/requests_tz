@@ -1,4 +1,4 @@
-tornado==6.1
+tornado
 
 # db
 databases

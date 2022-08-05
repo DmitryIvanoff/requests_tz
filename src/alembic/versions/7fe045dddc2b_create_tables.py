@@ -23,7 +23,7 @@ def upgrade():
         sa.Column("key", sa.Text(), nullable=False),
         sa.Column("body", sa.JSON(), nullable=True),
         sa.Column("amount", sa.Integer(), nullable=True),
-        sa.PrimaryKeyConstraint("key"),
+        sa.PrimaryKeyConstraint("key", name='requests_pk'),
     )
     op.create_index(op.f("ix_requests_key"), "requests", ["key"], unique=False)
     # ### end Alembic commands ###

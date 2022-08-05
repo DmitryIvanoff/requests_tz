@@ -7,8 +7,8 @@ import databases
 import tornado.ioloop
 import tornado.web
 from marshmallow.exceptions import ValidationError
-from sqlalchemy import delete, insert, select, update
-
+from sqlalchemy import delete, select, update
+from sqlalchemy.dialects.postgresql import insert
 from app.models import Request
 from app.schemas import RequestSchema
 
@@ -110,24 +110,12 @@ class RequestsCreateListHandler(BaseHandler):
             raise tornado.web.HTTPError(400)
 
         # check that key in db then update if not insert
-        async with db.transaction(isolation="read_committed"):
-            entity = await self.fetch_entity(validated_data.key)
-            if not entity:
-                query = insert(model).values(
-                    key=validated_data.key, body=validated_data.body, amount=1
-                )
-                result = await db.execute(query)
-                logger.debug(f"query: {query}\nresult: {result}")
-                self.set_status(201, "Created")
-            else:
-                query = (
-                    update(model)
-                    .where(model.key == validated_data.key)
-                    .values(amount=model.amount + 1)
-                )
-                result = await db.execute(query)
-                logger.debug(f"query: {query}\nresult: {result}")
-                self.set_status(200, "Ok")
-            entity = await self.fetch_entity(validated_data.key)
-
-        await self.finish(entity)
+        query = insert(model).values(
+            key=validated_data.key, body=validated_data.body, amount=1
+        ).on_conflict_do_update(
+            constraint='requests_pk',
+            set_=dict(amount=model.amount + 1)
+        ).returning('*')
+        result = await db.execute(query)
+        logger.debug(f"query: {query}\nresult: {result}")
+        self.set_status(200, "Ok")
